@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¡Evalúanos aquí! — Data Bunker</title>
+<meta name="description" content="Comparte tu experiencia con Data Bunker en G2, Capterra y Google.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0c2340;
+    --navy-deep:#091a30;
+    --cyan:#17a8cc;
+    --cyan-soft:#3fc1e0;
+    --ink:#0c2340;
+    --body:#52617a;
+    --line:#e5eaf1;
+    --card:#ffffff;
+    --bg:#f4f7fb;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.45;
+    padding:24px 16px;
+    display:flex;
+    justify-content:center;
+  }
+  .sheet{
+    width:100%;
+    max-width:840px;
+    background:#fff;
+    border-radius:22px;
+    overflow:hidden;
+    box-shadow:0 18px 60px rgba(12,35,64,.14);
+    position:relative;
+  }
+
+  /* ---- Decoración hexagonal en esquinas ---- */
+  .corner{position:absolute;width:170px;height:170px;opacity:.55;pointer-events:none;z-index:0}
+  .corner.tl{top:0;left:0}
+  .corner.tr{top:0;right:0;transform:scaleX(-1)}
+
+  /* ---- Banner superior ---- */
+  .banner{
+    background:var(--navy);
+    color:rgba(255,255,255,.85);
+    font-family:'Poppins',sans-serif;
+    font-weight:600;
+    font-size:13px;
+    letter-spacing:.5px;
+    padding:9px 0;
+    text-align:center;
+    white-space:nowrap;
+    overflow:hidden;
+  }
+  .banner span{margin:0 18px;opacity:.9}
+  .banner span::before{content:"◆";color:var(--cyan-soft);font-size:9px;margin-right:18px;vertical-align:middle}
+
+  .inner{padding:34px 30px 0;position:relative;z-index:1}
+
+  /* ---- Logo ---- */
+  .logo-wrap{
+    background:#eef2f7;
+    border-radius:14px;
+    padding:20px 26px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    max-width:420px;
+    margin:0 auto;
+  }
+  .logo-icon{width:42px;height:42px;flex:none}
+  .logo-text{
+    font-family:'Poppins',sans-serif;
+    font-weight:800;
+    font-size:30px;
+    letter-spacing:2px;
+    color:var(--navy);
+    line-height:1;
+    border-bottom:3px solid var(--navy);
+    padding-bottom:5px;
+  }
+
+  .rule{display:flex;align-items:center;justify-content:center;gap:0;margin:26px 0 22px}
+  .rule i{height:3px;width:70px;background:var(--line);display:block}
+  .rule i.mid{width:90px;background:var(--cyan);border-radius:2px}
+
+  /* ---- Título ---- */
+  h1{
+    font-family:'Poppins',sans-serif;
+    font-weight:800;
+    font-size:clamp(26px,5.4vw,40px);
+    text-align:center;
+    color:var(--navy);
+    line-height:1.12;
+    letter-spacing:-.5px;
+  }
+  .sub{
+    text-align:center;
+    color:var(--body);
+    font-size:clamp(15px,2.6vw,19px);
+    margin-top:10px;
+  }
+
+  /* ---- Tarjetas ---- */
+  .cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+    margin-top:30px;
+  }
+  .card{
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:24px 18px 26px;
+    display:flex;
+    flex-direction:column;
+    background:var(--card);
+  }
+  .platform{
+    height:74px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:18px;
+  }
+  .platform svg, .platform img{max-height:100%;max-width:100%}
+
+  .btn{
+    display:block;
+    text-align:center;
+    text-decoration:none;
+    font-family:'Poppins',sans-serif;
+    font-weight:700;
+    font-size:15px;
+    color:var(--navy);
+    border:1.6px solid var(--navy);
+    border-radius:30px;
+    padding:12px 10px;
+    background:#fff;
+    transition:all .18s ease;
+    position:relative;
+  }
+  .btn::after{
+    content:"";
+    position:absolute;
+    inset:4px;
+    border:1px dashed rgba(12,35,64,.28);
+    border-radius:26px;
+    pointer-events:none;
+  }
+  .btn:hover,.btn:focus-visible{
+    background:var(--navy);
+    color:#fff;
+  }
+  .btn:hover::after,.btn:focus-visible::after{border-color:rgba(255,255,255,.4)}
+  .btn:focus-visible{outline:3px solid var(--cyan);outline-offset:2px}
+
+  .divider{height:2px;background:var(--cyan);width:100%;border-radius:2px;margin:22px 0 18px;opacity:.85}
+
+  .steps{list-style:none;display:flex;flex-direction:column;gap:16px}
+  .steps li{display:flex;gap:12px;align-items:flex-start}
+  .num{
+    flex:none;
+    width:26px;height:26px;
+    border-radius:50%;
+    background:var(--navy);
+    color:#fff;
+    font-family:'Poppins',sans-serif;
+    font-weight:700;
+    font-size:13px;
+    display:flex;align-items:center;justify-content:center;
+    margin-top:1px;
+  }
+  .steps p{font-size:15px;color:#33405a;line-height:1.35}
+
+  /* ---- Cierre con escudo ---- */
+  .closing{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:16px;
+    margin:34px 0 6px;
+    text-align:left;
+  }
+  .closing svg{flex:none}
+  .closing p{
+    font-family:'Poppins',sans-serif;
+    font-weight:700;
+    font-size:clamp(16px,2.8vw,20px);
+    color:var(--navy);
+    line-height:1.3;
+  }
+  .dots{display:flex;gap:9px;justify-content:center;margin:18px 0 30px}
+  .dots i{width:9px;height:9px;border-radius:50%;background:var(--cyan);display:block;opacity:.85}
+  .dots i:nth-child(1){opacity:.4}
+  .dots i:nth-child(4){opacity:.4}
+
+  /* ---- Footer social ---- */
+  .footer{
+    background:var(--navy-deep);
+    padding:24px 18px;
+    position:relative;
+    z-index:1;
+  }
+  .social{
+    background:#fff;
+    border-radius:16px;
+    padding:16px 14px;
+    max-width:720px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+  }
+  .soc{display:flex;align-items:center;gap:10px;text-decoration:none;justify-content:center}
+  .soc svg{flex:none;width:34px;height:34px}
+  .soc .lbl{line-height:1.15}
+  .soc .lbl b{display:block;font-family:'Poppins',sans-serif;font-weight:700;font-size:14px;color:var(--navy)}
+  .soc .lbl span{font-size:12px;color:var(--body)}
+
+  /* ---- Responsive ---- */
+  @media (max-width:680px){
+    body{padding:14px 8px}
+    .sheet{border-radius:18px}
+    .inner{padding:26px 18px 0}
+    .cards{grid-template-columns:1fr;gap:14px}
+    .card{padding:22px 20px}
+    .platform{height:60px;margin-bottom:14px}
+    .corner{width:120px;height:120px}
+    .social{grid-template-columns:repeat(2,1fr);gap:14px;padding:18px}
+    .soc{justify-content:flex-start}
+    .closing{flex-direction:row;gap:12px}
+  }
+  @media (max-width:380px){
+    .social{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none!important}
+  }
+</style>
+</head>
+<body>
+  <main class="sheet">
+
+    <!-- esquinas hexagonales -->
+    <svg class="corner tl" viewBox="0 0 200 200" fill="none" aria-hidden="true">
+      <g stroke="#0c2340" stroke-width="1.4" opacity=".5">
+        <path d="M10 30 l18-10 18 10 v22 l-18 10 -18-10 z"/>
+        <path d="M50 8 l18-10 18 10 v22 l-18 10 -18-10 z"/>
+        <path d="M30 62 l18-10 18 10 v22 l-18 10 -18-10 z"/>
+        <path d="M72 40 l18-10 18 10 v22 l-18 10 -18-10 z"/>
+      </g>
+      <g fill="#17a8cc" opacity=".5">
+        <circle cx="14" cy="96" r="2.4"/><circle cx="30" cy="96" r="2.4"/><circle cx="46" cy="96" r="2.4"/>
+        <circle cx="14" cy="112" r="2.4"/><circle cx="30" cy="112" r="2.4"/><circle cx="46" cy="112" r="2.4"/>
+      </g>
+    </svg>
+    <svg class="corner tr" viewBox="0 0 200 200" fill="none" aria-hidden="true">
+      <g stroke="#0c2340" stroke-width="1.4" opacity=".5">
+        <path d="M10 30 l18-10 18 10 v22 l-18 10 -18-10 z"/>
+        <path d="M50 8 l18-10 18 10 v22 l-18 10 -18-10 z"/>
+        <path d="M30 62 l18-10 18 10 v22 l-18 10 -18-10 z"/>
+        <path d="M72 40 l18-10 18 10 v22 l-18 10 -18-10 z"/>
+      </g>
+    </svg>
+
+    <!-- banner -->
+    <div class="banner">
+      <span>¡Evalúanos aquí!</span><span>¡Evalúanos aquí!</span><span>¡Evalúanos aquí!</span>
+    </div>
+
+    <div class="inner">
+      <!-- logo -->
+      <div class="logo-wrap">
+        <svg class="logo-icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <path d="M24 4 L42 14 V34 L24 44 L6 34 V14 Z" fill="#0c2340"/>
+          <path d="M24 10 L36 17 V31 L24 38 L12 31 V17 Z" fill="none" stroke="#17a8cc" stroke-width="1.6"/>
+          <path d="M18 20 h12 v10 h-12 z" fill="#fff"/>
+          <path d="M18 20 l6 4 6-4" fill="none" stroke="#0c2340" stroke-width="1.6"/>
+        </svg>
+        <div class="logo-text">DATA&nbsp;BUNKER</div>
+      </div>
+
+      <div class="rule"><i></i><i class="mid"></i><i></i></div>
+
+      <h1>¡Ayúdanos a seguir mejorando para ti!</h1>
+      <p class="sub">Comparte tu experiencia con Data Bunker</p>
+
+      <!-- tarjetas -->
+      <div class="cards">
+
+        <!-- G2 -->
+        <article class="card">
+          <div class="platform">
+            <svg viewBox="0 0 120 70" aria-label="G2">
+              <circle cx="40" cy="35" r="30" fill="#FF492C"/>
+              <path d="M40 14 a21 21 0 1 0 14 36.5 l-7-7 a11 11 0 1 1 -7-18.5 z" fill="#fff"/>
+              <path d="M48 24 h13 l-13 18 h13" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+              <text x="78" y="60" font-family="Poppins,sans-serif" font-size="11" font-weight="700" fill="#FF492C">TM</text>
+            </svg>
+          </div>
+          <a class="btn" href="https://www.g2.com/products/data-bunker/review_modalities/new" target="_blank" rel="noopener">¡Evalúanos aquí!</a>
+          <div class="divider"></div>
+          <ol class="steps">
+            <li><span class="num">1</span><p>Abre el link.</p></li>
+            <li><span class="num">2</span><p>Inicia sesión o crea cuenta si G2 lo pide.</p></li>
+            <li><span class="num">3</span><p>Completa la review y envíala.</p></li>
+          </ol>
+        </article>
+
+        <!-- Capterra -->
+        <article class="card">
+          <div class="platform">
+            <svg viewBox="0 0 240 60" aria-label="Capterra">
+              <polygon points="6,52 30,8 30,52" fill="#FF9D28"/>
+              <polygon points="30,8 30,52 54,52" fill="#044D80"/>
+              <polygon points="6,52 30,52 30,30" fill="#68C5ED"/>
+              <text x="64" y="44" font-family="Poppins,sans-serif" font-size="38" font-weight="700" fill="#044D80">Capterra</text>
+            </svg>
+          </div>
+          <a class="btn" href="https://www.capterra.com/p/248409/Pricing-Engine/reviews/" target="_blank" rel="noopener">¡Evalúanos aquí!</a>
+          <div class="divider"></div>
+          <ol class="steps">
+            <li><span class="num">1</span><p>Abre el link.</p></li>
+            <li><span class="num">2</span><p>Haz clic en "Write a review".</p></li>
+            <li><span class="num">3</span><p>Completa la review y envíala.</p></li>
+          </ol>
+        </article>
+
+        <!-- Google -->
+        <article class="card">
+          <div class="platform">
+            <svg viewBox="0 0 220 60" aria-label="Google" font-family="Poppins,sans-serif" font-size="46" font-weight="600">
+              <text x="0"   y="46" fill="#4285F4">G</text>
+              <text x="38"  y="46" fill="#EA4335">o</text>
+              <text x="72"  y="46" fill="#FBBC05">o</text>
+              <text x="106" y="46" fill="#4285F4">g</text>
+              <text x="140" y="46" fill="#34A853">l</text>
+              <text x="158" y="46" fill="#EA4335">e</text>
+            </svg>
+          </div>
+          <a class="btn" href="https://g.page/r/CbIpmCg2Ylw5EAI/review" target="_blank" rel="noopener">¡Evalúanos aquí!</a>
+          <div class="divider"></div>
+          <ol class="steps">
+            <li><span class="num">1</span><p>Abre el link.</p></li>
+            <li><span class="num">2</span><p>Inicia sesión con Google si lo pide.</p></li>
+            <li><span class="num">3</span><p>Califica con estrellas, escribe la reseña y envíala.</p></li>
+          </ol>
+        </article>
+
+      </div>
+
+      <!-- cierre -->
+      <div class="closing">
+        <svg width="48" height="54" viewBox="0 0 48 54" fill="none" aria-hidden="true">
+          <path d="M24 2 L44 10 V26 C44 40 35 49 24 52 C13 49 4 40 4 26 V10 Z" fill="#0c2340"/>
+          <path d="M24 16 l3.4 6.9 7.6 1.1 -5.5 5.4 1.3 7.6 -6.8-3.6 -6.8 3.6 1.3-7.6 -5.5-5.4 7.6-1.1 z" fill="#fff"/>
+        </svg>
+        <p>¡Tu reseña nos ayuda a seguir creciendo y a ofrecer el mejor servicio!</p>
+      </div>
+
+      <div class="dots"><i></i><i></i><i></i><i></i></div>
+    </div>
+
+    <!-- footer social -->
+    <div class="footer">
+      <div class="social">
+        <a class="soc" href="https://www.facebook.com/profile.php?id=61582846720761" target="_blank" rel="noopener" aria-label="Facebook Data Bunker">
+          <svg viewBox="0 0 36 36"><rect width="36" height="36" rx="8" fill="#1877F2"/><path d="M22 12h-2.2c-.7 0-1.1.4-1.1 1.2V15H22l-.4 3h-2.9v9h-3.5v-9H13v-3h2.2v-2.1c0-2.3 1.4-3.6 3.5-3.6 1 0 2 .1 2.3.1z" fill="#fff"/></svg>
+          <span class="lbl"><b>Facebook</b><span>Data Bunker</span></span>
+        </a>
+        <a class="soc" href="https://www.instagram.com/data.bunker" target="_blank" rel="noopener" aria-label="Instagram data.bunker">
+          <svg viewBox="0 0 36 36"><defs><linearGradient id="ig" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FEDA75"/><stop offset=".35" stop-color="#FA7E1E"/><stop offset=".6" stop-color="#D62976"/><stop offset="1" stop-color="#962FBF"/></linearGradient></defs><rect width="36" height="36" rx="8" fill="url(#ig)"/><rect x="9" y="9" width="18" height="18" rx="5.5" fill="none" stroke="#fff" stroke-width="2.2"/><circle cx="18" cy="18" r="4.4" fill="none" stroke="#fff" stroke-width="2.2"/><circle cx="24" cy="12" r="1.4" fill="#fff"/></svg>
+          <span class="lbl"><b>Instagram</b><span>@data.bunker</span></span>
+        </a>
+        <a class="soc" href="https://www.linkedin.com/company/data-bunker-business-solutions/" target="_blank" rel="noopener" aria-label="LinkedIn Data Bunker">
+          <svg viewBox="0 0 36 36"><rect width="36" height="36" rx="8" fill="#0A66C2"/><path d="M12 14h-3v12h3z M10.5 9.2a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 0 0 0-3.6z M15 14h2.9v1.6h.05c.4-.75 1.4-1.6 2.9-1.6 3.1 0 3.7 2 3.7 4.7V26h-3v-5.4c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9V26H15z" fill="#fff"/></svg>
+          <span class="lbl"><b>LinkedIn</b><span>Data Bunker</span></span>
+        </a>
+        <a class="soc" href="https://www.youtube.com/@databunkermx" target="_blank" rel="noopener" aria-label="YouTube databunkermx">
+          <svg viewBox="0 0 36 36"><rect width="36" height="36" rx="8" fill="#FF0000"/><path d="M27 14.2c-.2-1-.8-1.6-1.8-1.8C23.6 12 18 12 18 12s-5.6 0-7.2.4c-1 .2-1.6.8-1.8 1.8C8.7 15.8 8.7 18 8.7 18s0 2.2.3 3.8c.2 1 .8 1.6 1.8 1.8 1.6.4 7.2.4 7.2.4s5.6 0 7.2-.4c1-.2 1.6-.8 1.8-1.8.3-1.6.3-3.8.3-3.8s0-2.2-.3-3.8z" fill="#fff"/><path d="M16 21l4.5-3L16 15z" fill="#FF0000"/></svg>
+          <span class="lbl"><b>YouTube</b><span>@databunkermx</span></span>
+        </a>
+      </div>
+    </div>
+
+  </main>
+</body>
+</html>
